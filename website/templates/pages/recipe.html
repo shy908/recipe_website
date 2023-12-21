@@ -1,0 +1,110 @@
+{% extends 'base/template.html' %}
+{% block title %} Recipe {% endblock title %}
+{% block body_data %}
+    {% for recipe in recipe_post %}
+        <div class="recipe_page_content">
+            <section class="breadcrumb">
+                <div class="breadcrumb_row">
+                    <div class="breadcrumb_link">
+                        <span class="breadcrumb_home"></span>
+                        <a href="/" title="Home" aria-label="Breadcrumb link to return home">Home</a>
+                    </div>
+                    <span class="breadcrumb_chevron">&gt;</span>
+                    <div class="breadcrumb_link">
+                        <span class="breadcrumb_recipes"></span>
+                        <a href="/recipes" title="Recipes" aria-label="Breadcrumb link for recipers">Recipes</a>
+                    </div>
+                    <span class="breadcrumb_chevron">&gt;</span>
+                    <div class="breadcrumb_link">
+                        <span class="breadcrumb_recipe"></span>
+                        <a href="recipe/{{ recipe.id }}" title="{{ recipe.title }}" aria-label="Breadcrumb link for {{ recipe.title }}">{{ recipe.title }}</a>
+                    </div>
+                </div>
+            </section>
+            <article>
+                <div class="recipe_profile">
+                    <div class="recipe_profile_media">
+                        {% if 'image' in recipe.file_type and 'heic' not in recipe.file_type %}
+                            <div class="file_type_image">
+                                <img src="/{{ recipe.file_path }}" alt="Recipe">
+                            </div>
+                        {% elif 'image/heic' in recipe.file_type %}
+                        <div class="file_type_image">
+                            <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M23 4C23 2.34315 21.6569 1 20 1H4C2.34315 1 1 2.34315 1 4V20C1 21.6569 2.34315 23 4 23H20C21.6569 23 23 21.6569 23 20V4ZM21 4C21 3.44772 20.5523 3 20 3H4C3.44772 3 3 3.44772 3 4V20C3 20.5523 3.44772 21 4 21H20C20.5523 21 21 20.5523 21 20V4Z" fill="#0F0F0F"/>
+                                <path d="M4.80665 17.5211L9.1221 9.60947C9.50112 8.91461 10.4989 8.91461 10.8779 9.60947L14.0465 15.4186L15.1318 13.5194C15.5157 12.8476 16.4843 12.8476 16.8682 13.5194L19.1451 17.5039C19.526 18.1705 19.0446 19 18.2768 19H5.68454C4.92548 19 4.44317 18.1875 4.80665 17.5211Z" fill="#0F0F0F"/>
+                                <path d="M18 8C18 9.10457 17.1046 10 16 10C14.8954 10 14 9.10457 14 8C14 6.89543 14.8954 6 16 6C17.1046 6 18 6.89543 18 8Z" fill="#0F0F0F"/>
+                            </svg>
+                        </div>
+                        {% endif %}
+                        {% if 'video' in recipe.file_type %}
+                            <div class="file_type_image">
+                                <video controls controlsList="nodownload">
+                                    <source src="/{{ recipe.file_path }}" type="video/mp4">
+                                </video>
+                            </div>
+                        {% endif %}
+                        {% if 'application' in recipe.file_type %}
+                        <div class="file_type_application">
+                            <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect width="24" height="24" fill="white"/>
+                                <path d="M10 1.5L12.5 4L15 6.5M10 1.5L3 1.5L3 17.5L15 17.5L15 6.5M10 1.5L10 6.5L15 6.5" stroke="#000000" stroke-linejoin="round"/>
+                                <path d="M17 6.5L19.5 9L22 11.5M17 6.5L17 11.5L22 11.5M17 6.5L14 6.5M22 11.5L22 22.5L10 22.5L10 17.5" stroke="#000000" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        {% endif %}
+                        {% if recipe.file_type is None %}
+                        <div class="file_type_no_media">
+                            <span class="no_file">No File</span>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="recipe_profile_information">
+                        <section class="recipe_profile_top">
+                            <h1>
+                                {{ recipe.title }}
+                                {% if user.is_authenticated and user.get_username == recipe.uploader.username %}
+                                    <a class="recipe_edit" href="/edit-recipe/{{ recipe.id }}" title="Edit recipe" aria-label="Edit recipe">
+                                        <svg fill="#000000" width="800px" height="800px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M1,22V4A1,1,0,0,1,2,3H12a1,1,0,0,1,0,2H3V21H19V12a1,1,0,0,1,2,0V22a1,1,0,0,1-1,1H2A1,1,0,0,1,1,22ZM11.293,8.626l7.333-7.333a1,1,0,0,1,1.414,0l2.667,2.666a1,1,0,0,1,0,1.415l-7.334,7.333a1,1,0,0,1-.707.293H12a1,1,0,0,1-1-1V9.333A1,1,0,0,1,11.293,8.626ZM13,11h1.252l6.334-6.333L19.333,3.414,13,9.748Z"/></svg>
+                                    </a>
+                                {% endif %}
+                            </h1>
+                        </section>
+                        <section class="recipe_profile_description">
+                            <p>{{ recipe.description }}</p>
+                        </section>
+                        <section class="recipe_posted_by">
+                            <div class="recipe_posted_row">
+                                <strong>Uploaded By</strong>
+                                <span>{{ recipe.uploader.username }}</span>
+                            </div>
+                            <div class="recipe_posted_row">
+                                <strong>Date Uploaded</strong>
+                                <span>{{ recipe.date_created }}</span>
+                            </div>
+                        </section>
+                        <section class="recipe_share">
+                            <button class="btn_share btn_share_recipe">Share</button>
+                        </section>
+                        {% if recipe.filename.strip %}
+                            <section class="recipe_downloads">
+                                <!-- <h2>Downloads</h2> -->
+                                <div class="recipe_downloads_row recipe_downloads_filename">
+                                    <span>File name</span>
+                                    <span>{{ recipe.file_name }}</span>
+                                </div>
+                                <div class="recipe_downloads_row recipe_downloads_filetype">
+                                    <span>File type</span>
+                                    <span>{{ recipe.file_type }}</span>
+                                </div>
+                                <div class="recipe_downloads_link">
+                                    <a class="btn_download" href="{{ recipe.file_path }}" title="Download recipe file" download="{{ recipe.file_name }}" aria-label="Download link for recipe file">Download File</a>
+                                </div>
+                            </section>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+        </div>
+    {% endfor %}
+{% endblock body_data %}

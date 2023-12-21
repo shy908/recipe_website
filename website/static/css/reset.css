@@ -1,0 +1,43 @@
+a,
+button,
+small,
+span,
+strong,
+blockquote,
+audio,
+video{
+    display: inline-block;
+}
+img,
+video{
+    width: 100%;
+    max-width: 100%;
+}
+a{
+    outline: none;
+    border: 0;
+    text-decoration: none;
+    text-align: center;
+}
+a:hover{
+    text-decoration: none;
+}
+button{
+    user-select: none;
+    text-align: center;
+    outline: none;
+    border: 0;
+    cursor: pointer;
+    padding: 12px 25px;
+    background: transparent;
+    color: var(--color-dark-grey);
+    font-size: var(--font-size-normal);
+}
+button[disabled]{
+    opacity: var(--opacity-dim);
+}
+ol,
+ul{
+    list-style: none;
+    list-style-type: none;
+}

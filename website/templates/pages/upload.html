@@ -1,0 +1,12 @@
+{% extends 'base/template.html' %}
+{% block title %} Upload {% endblock title %}
+{% block page_header %} Upload Recipe {% endblock page_header %}
+{% block body_data %}
+    <div class="form_wrapper">
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ uploadForm.as_div }}
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+{% endblock body_data %}

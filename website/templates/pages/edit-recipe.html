@@ -1,0 +1,88 @@
+{% extends 'base/template.html' %}
+{% block title %} Edit Recipe {% endblock title %}
+{% block body_data %}
+    <!-- <section class="page_content"> -->
+        <article>
+            <div class="edit_recipe_content">
+                <div class="edit_recipe_bg"></div>
+                <div class="edit_recipe_form">
+                    {% for edit in edit_post %}
+                    <div class="form_wrapper">
+                        <section class="breadcrumb">
+                            <div class="breadcrumb_row">
+                                <div class="breadcrumb_link">
+                                    <span class="breadcrumb_home"></span>
+                                    <a href="/" title="Home" aria-label="Breadcrumb link to return home">Home</a>
+                                </div>
+                                <span class="breadcrumb_chevron">&gt;</span>
+                                <div class="breadcrumb_link">
+                                    <span class="breadcrumb_recipes"></span>
+                                    <a href="/recipes" title="Recipes" aria-label="Breadcrumb link for recipers">Recipes</a>
+                                </div>
+                                <span class="breadcrumb_chevron">&gt;</span>
+                                <div class="breadcrumb_link">
+                                    <span class="breadcrumb_recipe"></span>
+                                    <a href="/recipe/{{ edit.id }}" title="{{ edit.title }}" aria-label="Breadcrumb link for {{ edit.title }}">{{ edit.title }}</a>
+                                </div>
+                                <span class="breadcrumb_chevron">&gt;</span>
+                                <div class="breadcrumb_link">
+                                    <p>Edit ({{ edit.title }})</p>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="edit_recipe_header">
+                            <h1>Editing Recipe</h1>
+                            <span>"{{ edit.title }}"</span>
+                        </div>
+                        <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div>
+                                <input type="hidden" name="file_name" value="{{ edit.file_name }}">
+                                <input type="hidden" name="file_extension" value="{{ edit.file_extension }}">
+                                <input type="hidden" name="file_type" value="{{ edit.file_type }}">
+                                <input type="hidden" name="file_size" value="{{ edit.file_size }}">
+                                <input type="hidden" name="file_path" value="{{ edit.file_path }}">
+                                <input type="hidden" name="uploader_id" value="{{ edit.uploader.id }}">
+                            </div>
+                            <div>
+                                <label for="id_title">Title</label>
+                                <input type="text" name="title" id="id_title" value="{{ edit.title }}">
+                            </div>
+                            <div>
+                                <label for="id_description">Description</label>
+                                <textarea name="description" id="id_description" cols="40" rows="10">{{ edit.description }}</textarea>
+                            </div>
+                            <div>
+                                <label for="id_file">File</label>
+                                <input type="file" name="file" id="id_file">
+                            </div>
+                            <div class="form_buttons">
+                                <button type="submit" title="Save Edit" aria-label="Button to save edits to the recipe">Save Edit</button>
+                                <a class="btn btn_cancel" href="/recipe/{{ edit.id }}" title="Cancel" aria-label="Link returns to the recipe description page">Cancel</a>
+                            </div>
+                        </form>
+                        {% if edit.file_name is not None %}
+                        <div class="edit_recipe_file_information">
+                            <p>Pre-existing file/attachment contents</p>
+                            <div class="edit_file_info_row">
+                                <span>File Name</span>
+                                <a class="txt_align_reset link_view" href="/{{ edit.file_path }}" title="{{ edit.file_name }}" target="_blank" aria-label="Link to view media file">{{ edit.file_name }}</a>
+                                <!-- <span>{{ edit.file_name }}</span> -->
+                            </div>
+                            <div class="edit_file_info_row">
+                                <span>File Type</span>
+                                <span>{{ edit.file_type }}</span>
+                            </div>
+                            <div class="edit_file_info_row">
+                                <span>File Extension</span>
+                                <span>{{ edit.file_extension }}</span>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </article>
+    <!-- </section> -->
+{% endblock body_data %}

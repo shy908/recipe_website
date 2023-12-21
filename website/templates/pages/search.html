@@ -1,0 +1,67 @@
+{% extends 'base/template.html' %}
+{% block title %} Search {% endblock title %}
+{% block body_data %}
+    <section class="page_header page_header_centered recipes_bg">
+        <h1>Recipes</h1>
+    </section>
+    <section class="page_content">
+        <article>
+            <div class="search_items_count">
+                <p><span>Showing results for "{{ text }}"</span></p>
+                <p><small>{{ data | length }} Result(s) Found</small></p>
+            </div>
+            <div class="search_posts">
+                {% for result in data %}
+                    <div class="search_card">
+                        {% if 'image' in result.file_type %}
+                            <div class="search_media recipe_image">
+                                {% if result.file_type and result.file_type.strip %}
+                                    <a class="btn-download" href="/{{ result.file_path}}" title="{{ result.title }}" aria-label="Link to download recipe file" download="{{ result.file_name}}">Download</a>
+                                {% endif %}
+                            </div>
+                        {% elif 'video' in result.file_type %}
+                            <div class="search_media recipe_image">
+                                {% if result.file_type and result.file_type.strip %}
+                                    <a class="btn-download" href="/{{ result.file_path}}" title="{{ result.title }}" aria-label="Link to download recipe file" download="{{ result.file_name}}">Download</a>
+                                {% endif %}
+                            </div>  
+                        {% elif 'application' in result.file_type %} 
+                            <div class="search_media recipe_application">
+                                {% if result.file_type and result.file_type.strip %}
+                                    <a class="btn-download" href="/{{ result.file_path}}" title="{{ result.title }}" aria-label="Link to download recipe file" download="{{ result.file_name}}">Download</a>
+                                {% endif %}
+                            </div>
+                        {% else %}
+                            <div class="search_media recipe_no_media">
+                                <!-- <a class="btn-download">Download</a> -->
+                            </div>                        
+                        {% endif %}
+                        <div class="search_title">
+                            <span>{{ result.title }}</span>
+                        </div>
+                        <div class="search_description">
+                            {% if result.description and result.description.strip %}
+                                <p>{{ result.description|slice:"0:30" }}...</p>
+                            {% else %}
+                                <p></p>
+                            {% endif %}
+                        </div>
+                        <div class="search_information">
+                            <div class="search_information_row">
+                                <strong>File Size</strong>
+                                {% if result.file_size and result.file_size.split %}
+                                    <span>{{ result.file_size|filesizeformat }}</span>
+                                {% else %}
+                                    <span>0.00MB</span>
+                                {% endif %}
+                            </div>
+                            <div class="search_download_row">
+                                <a class="btn-view" href="/recipe/{{ result.pk }}" title="{{ result.title }}" aria-label="Link to view recipe {{ result.title }}">View</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </article>
+    </section>
+{% endblock body_data %}

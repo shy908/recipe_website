@@ -1,0 +1,22 @@
+{% extends 'base/template.html' %}
+{% block title %} Delete Recipe {% endblock title %}
+{% block body_data %}
+    <section class="page_content">
+        <article>
+            {% for post in delete_post %}
+            <div class="form_wrapper">
+                    <h1>Deleting <span>"{{ post.title }}"</span></h1>
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="post_id" value="{{ post.id }}">
+                        <p>Are you sure you want to delete '{{ post.title }}'?</p>
+                        <div class="form_buttons">
+                            <button type="submit">Yes</button>
+                            <a class="btn" href="{% url 'dashboard' %}">Back</a>
+                        </div>
+                    </form>
+                </div>
+            {% endfor %}
+        </article>
+    </section>
+{% endblock body_data %}

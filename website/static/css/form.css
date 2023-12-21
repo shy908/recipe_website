@@ -1,0 +1,128 @@
+.form_wrapper {
+    width: 100%;
+    margin: var(--margin-centered);
+    max-width: calc(var(--width-100) * 6);
+    padding: calc(var(--default-space) * 2);
+}
+.form_wrapper span[class*="helptext"] {
+    display: none;
+}
+.form_wrapper form{
+    display: block;
+    width: 100%;
+    margin: var(--margin-centered);
+}
+.form_wrapper form > p,
+.form_wrapper form > div{
+    display: grid;
+    margin: calc(var(--min-space) * 5) 0;
+}
+.form_wrapper form > p label,
+.form_wrapper form > div label {
+    font-weight: 200;
+    margin-bottom: var(--medium-space);
+}
+.form_wrapper form > p textarea,
+.form_wrapper form > div textarea{
+    resize: none;
+}
+.form_wrapper form > p input[type="text"],
+.form_wrapper form > p input[type="email"],
+.form_wrapper form > p input[type="password"],
+.form_wrapper form > p textarea,
+.form_wrapper form > div input[type="text"],
+.form_wrapper form > div input[type="email"],
+.form_wrapper form > div input[type="password"],
+.form_wrapper form > div textarea {
+    outline: none;
+    border: 1px solid var(--color-dark-grey);
+    border-radius: 0;
+    padding: var(--medium-space);
+    font-size: var(--default-space);
+    background: var(--color-white);
+    transition: var(--transition-fastest) linear;
+}
+.form_wrapper form > p input[type="text"]:focus,
+.form_wrapper form > p input[type="email"]:focus,
+.form_wrapper form > p input[type="password"]:focus,
+.form_wrapper form > p textarea:focus,
+.form_wrapper form > div input[type="text"]:focus,
+.form_wrapper form > div input[type="email"]:focus,
+.form_wrapper form > div input[type="password"]:focus,
+.form_wrapper form > div textarea:focus {
+    background: var(--focus-background);
+}
+.form_wrapper form > p:has(input[type=file]),
+.form_wrapper form > div:has(input[type=file]){
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.form_wrapper form > p:has(input[type=file])::before,
+.form_wrapper form > div:has(input[type=file])::before{
+    content: '';
+    background: url('../images//icon-attachment.svg') no-repeat center;
+    background-size: contain;
+    width: var(--icon-size);
+    height: var(--icon-size);
+}
+.form_wrapper form > p:has(input[type=file]) label,
+.form_wrapper form > div:has(input[type=file]) label{
+    display: none;
+}
+.form_wrapper form > p:has(input[type=file]) svg,
+.form_wrapper form > div:has(input[type=file]) svg{
+    opacity: var(--opacity-dim);
+    width: 100%;
+    max-width: var(--icon-size);
+    height: var(--icon-size);
+    object-fit: contain;
+    object-position: center;
+}
+.form_wrapper form > ul{
+    padding: var(--default-space);
+    background: var(--alert-warning);
+    border-radius: var(--min-space);
+}
+.form_wrapper form > ul li{
+    font-weight: 200;
+    font-size: 90%;
+}
+.form_wrapper form button[type=submit]{
+    width: 100%;
+    color: var(--color-white);
+    background: var(--btn-blue);
+    transition: var(--transition-fastest) linear;
+}
+.form_wrapper form button[type=submit]:hover{
+    background: var(--color-black);
+}
+.form_wrapper .form_buttons{
+    display: flex !important;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.form_wrapper .form_buttons button,
+.form_wrapper .form_buttons a{
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    width: 100%;
+    margin-bottom: var(--medium-space);
+}
+@media (min-width: 768px){
+    .form_wrapper form button[type=submit]{
+        width: initial;
+    }
+    .form_wrapper .form_buttons{
+        justify-content: space-between;
+        width: 100%;
+        max-width: calc(var(--width-100) * 3);
+    }
+    .form_wrapper .form_buttons button,
+    .form_wrapper .form_buttons a{
+        width: initial;
+        -ms-flex: unset;
+        flex: unset;
+    }
+}

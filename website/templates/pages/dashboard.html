@@ -1,0 +1,22 @@
+{% extends 'base/template.html' %}
+{% block title %} Dashboard {% endblock title %}
+{% block page_header %} Welcome to your profile {% endblock page_header %}
+{% block body_data %}
+    <article>
+        <div class="dashboard_wrapper">
+            <div class="dashboard_top"></div>
+            <div class="dashboard_bottom">
+                <div class="dashboard_content">
+                    <div class="dashboard_bottom_grid">
+                        <canvas id="dashboardStats" width="100" height="100"></canvas>
+                        <div class="dashboard_stats_info"></div>
+                    </div>
+                    <div class="dashboard_bottom_user_posts">
+                        <input type="text" name="posts_search_filter" placeholder="Search filter....">
+                        <div class="dashboard_user_posts_lists"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+{% endblock body_data %}

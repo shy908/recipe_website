@@ -1,0 +1,44 @@
+{% extends 'base/template.html' %}
+{% block title %} Home {% endblock title %}
+{% block body_data %}
+    <section class="slider_container">
+        <div class="slider"><img src="../../static/images/slider/slider_one.jpeg" alt="Slider"><span>Slider One</span></div>
+        <div class="slider"><img src="../../static/images/slider/slider_two.jpeg" alt="Slider"><span>Slider Two</span></div>
+        <div class="slider"><img src="../../static/images/slider/slider_three.jpeg" alt="Slider"><span>Slider Three</span></div>
+        <div class="slider"><img src="../../static/images/slider/slider_four.jpeg" alt="Slider"><span>Slider Four</span></div>
+        <div class="slider"><img src="../../static/images/slider/slider_five.jpeg" alt="Slider"><span>Slider Five</span></div>
+        <div class="slider_spinner">
+            <div class="spinner"></div>
+        </div>
+    </section>
+    <section class="page_content">
+        <article class="article_compact article_grid">
+            <div class="article_content">
+                <h2>Welcome</h2>
+                <p>Post your recipe is your one stop shop for all your favourite recipes.</p>
+                <p>Do you have a fancy recipe which might be sweet or savoury?</p>
+                <p>Share with the rest of the community and learn how to also make various dishes.</p>
+            </div>
+            <div class="article_content_image">
+                <img class="bouncy_image" src="../../static/images/icon-spatula-color.svg" alt="Spatula">
+            </div>
+        </article>
+        <article class="article_compact article_grid">
+            <div class="article_content_image">
+                <img class="bouncy_image" src="../../static/images/icon-food-stall-color.svg" alt="Food Stall">
+            </div>
+            <div class="article_content">
+                <h2>Recipes</h2>
+                <p>Perhaps you are eager to jump into the action and learn a new dish.</p>
+                <p>Food makes everyone happy!</p>
+                <p>We have multiple people sharing their recipes and we hope they will inspire you.</p>
+            </div>
+        </article>
+        <article class="article_compact">
+            <p>Click the link below to start looking at your next recipe</p>
+            <div class="article_link">
+                <a class="btn btn_cancel" href="{% url 'recipes' %}" title="Recipes" aria-label="Link to to go to the recipes page">Learn More</a>
+            </div>
+        </article>
+    </section>
+{% endblock body_data %}
