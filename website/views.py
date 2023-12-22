@@ -100,11 +100,12 @@ def upload(request):
                 # upload file to server
                 default_storage.save(file_name, f)
             except Exception:
-                file_name = ''
-                file_extension = ''
-                file_type = ''
-                file_size = ''
-                file_path = ''
+                f = None
+                file_name = None
+                file_extension = None
+                file_type = None
+                file_size = None
+                file_path = None  
 
             # save to database
             db_upload = MediaUpload.objects.create(
